@@ -6,7 +6,7 @@ const route = Router()
 route.get('/characters', async (req, res) => {
   const characters = await DetailsCharacters.find()
 
-  return res.json({ characters })
+  return res.send({ characters })
 })
 
 module.exports = route

@@ -11,7 +11,7 @@ route.get("/books/:id", async (req, res) => {
     item.books.map((items) => bookList.push(items))
   })
 
-  return res.json({
+  return res.send({
     id_character: id,
     books: bookList,
   })
