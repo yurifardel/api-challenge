@@ -1,0 +1,16 @@
+const express = require('express')
+const bodyParser = require("body-parser");
+const auth = require('./src/domain/auth')
+const { books, characters }= require('./src/domain/usecases')
+
+const app = express()
+
+app.use(express.json())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true} ))
+
+app.use(auth)
+app.use(characters)
+app.use(books)
+
+app.listen(8080, () => console.log('express listening with stability'))
