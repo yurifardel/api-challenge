@@ -3,7 +3,7 @@ const request = require("request")
 const {ApiLinks, DetailsCharacters, booksCollection} = require("../data/model")
 const route = Router()
 
-route.get("/", async (req, res) => {
+route.get("/auth/api", async (req, res) => {
   try {
     request(
       "https://anapioficeandfire.com/api/books/",
@@ -38,7 +38,7 @@ route.get("/", async (req, res) => {
   }
 })
 
-route.get("/details", async (req, res) => {
+route.get("/auth/api/details", async (req, res) => {
   try {
     const [links] = await ApiLinks.find()
     links.apis.map((item) => {
@@ -59,7 +59,7 @@ route.get("/details", async (req, res) => {
   }
 })
 
-route.get("/books", async (req, res) => {
+route.get("/auth/api/books", async (req, res) => {
   try {
     const booksReq = await DetailsCharacters.find().select("apiBooks")
     booksReq.map((item) => {
