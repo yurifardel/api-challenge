@@ -13,4 +13,8 @@ app.use(auth)
 app.use(characters)
 app.use(books)
 
+app.get('/', (req, res) => {
+  res.send('hello world')
+})
+
 app.listen(8080, () => console.log('express listening with stability'))
