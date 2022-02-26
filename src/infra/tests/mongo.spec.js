@@ -3,7 +3,7 @@ require('dotenv').config()
 
 describe('Mongo helper', () => {
   beforeAll(async () => {
-    await mongoose.connect('mongodb://localhost:27017/mobix')
+    await mongoose.connect(process.env.MONGO_URL)
   })
   test('should connect mongodb', () => {
     expect(mongoose).toBeTruthy()
