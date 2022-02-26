@@ -5,9 +5,7 @@ const route = Router()
 
 
 route.get('/characters', async  (req, res, next) => {
-
   const characters = await DetailsCharacters.find()
-  next()
 
   return res.json({ characters })
 })

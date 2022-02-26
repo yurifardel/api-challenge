@@ -1,11 +1,10 @@
 const mongoose = require('mongoose')
+require('dotenv').config()
 
-mongoose.connect('mongodb://localhost:27017/mobix', {
+
+mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true, 
   useUnifiedTopology: true
-  
-}, () => {
-  console.log('Mongodb database connection established successfully')
 })
 
 mongoose.Promise = global.Promise

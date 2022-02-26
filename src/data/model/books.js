@@ -8,6 +8,9 @@ const BooksSchema = new mongoose.Schema({
   },
   books: {
     type: [String]
+  },
+  isbn: {
+    type: String
   }
   
 })

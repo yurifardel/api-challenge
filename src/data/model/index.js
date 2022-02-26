@@ -5,5 +5,5 @@ const ApiLinks = require('./api-links')
 module.exports = {
   DetailsCharacters,
   booksCollection,
-  ApiLinks
+  ApiLinks,
 }

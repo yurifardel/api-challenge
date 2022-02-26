@@ -54,6 +54,7 @@ route.get("/auth/api/details", async (req, res) => {
         })
       })
     })
+    return res.json({success: 200})
   } catch (error) {
     console.log(error)
   }
@@ -62,13 +63,18 @@ route.get("/auth/api/details", async (req, res) => {
 route.get("/auth/api/books", async (req, res) => {
   try {
     const booksReq = await DetailsCharacters.find().select("apiBooks")
+    
+   
+
     booksReq.map((item) => {
       item.apiBooks.map((items) => {
         request(items, async (err, response, body) => {
           const books = JSON.parse(body)
+
           await booksCollection.create({
             id_character: item._id,
             books: books.name,
+            isbn: books.isbn
           })
         })
       })
