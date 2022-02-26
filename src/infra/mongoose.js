@@ -3,7 +3,7 @@ const path = require('path');
 require('dotenv').config()
 
 
-mongoose.connect(process.env.MONGO_URL, {
+mongoose.connect('mongodb://0.0.0.0:27017/mobix', {
   useNewUrlParser: true, 
   useUnifiedTopology: true
 })
