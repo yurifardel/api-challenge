@@ -14,8 +14,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true} ))
 
 app.use(auth)
-app.use(characters)
-app.use(books)
+// app.use(characters)
+// app.use(books)
 
 app.get('/', (req, res) => {
   res.send('hello world!!')
