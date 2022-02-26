@@ -1,5 +1,5 @@
 const { Router } = require("express")
-const { booksCollection } = require("../../data/model")
+const { booksCollection } = require("../../infra/model")
 const imageToBase64 = require("image-to-base64")
 const route = Router()
 

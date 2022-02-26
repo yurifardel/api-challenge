@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { DetailsCharacters } = require('../../data/model')
+const { DetailsCharacters } = require('../../infra/model')
 
 const route = Router()
 

@@ -1,6 +1,6 @@
 const { Router } = require("express")
 const request = require("request")
-const {ApiLinks, DetailsCharacters, booksCollection} = require("../data/model")
+const {ApiLinks, DetailsCharacters, booksCollection} = require("../infra/model")
 const route = Router()
 
 route.get("/auth/api", async (req, res) => {
