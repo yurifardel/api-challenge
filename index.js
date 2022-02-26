@@ -1,8 +1,7 @@
 const express = require('express')
 const bodyParser = require("body-parser");
-const auth = require('./src/domain/auth')
-const { books, characters }= require('./src/domain/usecases')
-const { DetailsCharacters } = require('./src/infra/model/detail-characters')
+// const { books, characters, auth }= require('./src/domain/')
+const { DetailsCharacters } = require('./src/infra/model')
 
 
 const app = express()
@@ -13,7 +12,7 @@ app.use(express.json())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true} ))
 
-app.use(auth)
+// app.use(auth)
 // app.use(characters)
 // app.use(books)
 
