@@ -22,7 +22,7 @@ route.get("/books/:id", async (req, res, next) => {
     img64list.push(img)
   }
 
-  return res.send({
+  return res.json({
     id_character: id,
     books: bookList,
     covers: img64list,
