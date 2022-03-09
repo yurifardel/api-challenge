@@ -1,89 +1,35 @@
-const { Router } = require("express")
-const request = require("request")
-const {ApiLinks, DetailsCharacters, booksCollection} = require("../infra/model")
-const route = Router()
+const HttpRequestApis = require("../infra/refactor/http-request-apis");
+const { Router } = require("express");
+
+const route = Router();
+
+const makeSut = () => {
+  const sut = new HttpRequestApis();
+
+  return {
+    sut,
+  };
+};
 
 route.get("/auth/api", async (req, res) => {
-  try {
-    request(
-      "https://anapioficeandfire.com/api/books/",
-      async (err, response, body) => {
-        if (err) {
-          console.log(err)
-        }
-        if (!response) {
-          return res.json({ error: "Does not have an answer" })
-        }
+  const { sut } = makeSut();
+  await sut.getApis();
 
-        let listApiCharacters = []
-        const bodyParse = JSON.parse(body)
-
-        bodyParse.map((item) => {
-          item.povCharacters.map((items) => listApiCharacters.push(items))
-        })
-
-        const QUERY = await ApiLinks.find()
-
-        if (QUERY) {
-          return res.json({ info: "not allowed, collection already created" })
-        }
-
-        await ApiLinks.create({
-          apis: listApiCharacters,
-        })
-      }
-    )
-  } catch (error) {
-    console.log(error)
-  }
-})
+  return res.json({ statusCode: 200 });
+});
 
 route.get("/auth/api/details", async (req, res) => {
-  try {
-    const [links] = await ApiLinks.find()
-    links.apis.map((item) => {
-      request(item, async (err, response, body) => {
-        const details = JSON.parse(body)
-        await DetailsCharacters.create({
-          name: details.name,
-          gender: details.gender,
-          culture: details.culture,
-          titles: details.titles,
-          aliases: details.aliases,
-          apiBooks: details.books,
-        })
-      })
-    })
-    return res.json({success: 200})
-  } catch (error) {
-    console.log(error)
-  }
-})
+  const { sut } = makeSut();
+  await sut.getDetails();
+
+  return res.json({ statusCode: 200 });
+});
 
 route.get("/auth/api/books", async (req, res) => {
-  try {
-    const booksReq = await DetailsCharacters.find().select("apiBooks")
-    
-   
+  const { sut } = makeSut();
+  await sut.getBooks();
 
-    booksReq.map((item) => {
-      item.apiBooks.map((items) => {
-        request(items, async (err, response, body) => {
-          const books = JSON.parse(body)
+  return res.json({ statusCode: 200 });
+});
 
-          await booksCollection.create({
-            id_character: item._id,
-            books: books.name,
-            isbn: books.isbn
-          })
-        })
-      })
-    })
-
-    return res.json({ success: 200 })
-  } catch (error) {
-    console.log()
-  }
-})
-
-module.exports = route
+module.exports = route;
