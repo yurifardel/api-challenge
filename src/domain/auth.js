@@ -1,10 +1,10 @@
-const HttpRequestApis = require("../infra/refactor/http-request-apis");
+const HttpRequest = require("../infra/refactor/http-request");
 const { Router } = require("express");
 
 const route = Router();
 
 const makeSut = () => {
-  const sut = new HttpRequestApis();
+  const sut = new HttpRequest();
 
   return {
     sut,
